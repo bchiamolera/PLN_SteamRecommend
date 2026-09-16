@@ -30,3 +30,25 @@
 | votes_funny       | Quantas pessoas acharam a review engraçada | int                      |
 | weighted_score    | Peso de utilidade da review                | double                   |
 | playtime_forever  | Tempo de jogo de quando a review foi feita | int                      |
+
+
+---
+
+### Justificativa e explicação da escolha
+
+A base da Steam foi escolhida porque possui avaliações textuais de usuários e informações sobre os jogos. Esses dados são adequados para o objetivo do projeto, que é utilizar as opiniões de outros jogadores para recomendar jogos.
+
+### Adequação dos dados às tarefas de PLN
+
+A base apresenta um bom volume de avaliações e abrange diferentes jogos e gêneros. Também possui variedade de informações, como avaliações positivas e negativas, textos escritos livremente pelos usuários, gêneros, tags, tempo jogado e utilidade das avaliações.
+
+Essa variedade permite utilizar técnicas de PLN para analisar os textos, identificar características e opiniões sobre os jogos e utilizar essas informações no sistema de recomendação.
+
+### Organização e interpretabilidade da base de dados
+
+Os dados estão divididos principalmente em duas estruturas:
+
+* **Jogo:** possui informações como identificador, nome, descrição, gêneros e tags.
+* **Review:** possui o jogo avaliado, o texto da avaliação, se ela é positiva ou negativa, número de votos, tempo jogado e outras informações.
+
+As duas estruturas são relacionadas pelo `appid`, que identifica cada jogo. Essa organização facilita a compreensão e o processamento dos dados durante o desenvolvimento do sistema.
