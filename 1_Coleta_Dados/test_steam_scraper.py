@@ -13,7 +13,8 @@ import steam_scraper_support as support
 
 def notebook_functions():
     nb = json.loads(Path(__file__).with_name("PLN_Scrapping_Dados.ipynb").read_text(encoding="utf-8"))
-    code_cells = [cell for cell in nb["cells"] if cell["cell_type"] == "code"]
+    code_cells = [cell for cell in nb["cells"] if cell["cell_type"] == "code"
+                  and not "".join(cell["source"]).lstrip().startswith("%pip ")]
     ns = {"pasta_brutos": Path(__file__).resolve().parent.parent / "_DadosBrutos"}
     exec("".join(code_cells[1]["source"]), ns)
     for i in (2, 3, 4, 6):
