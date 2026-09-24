@@ -52,3 +52,12 @@ Os dados estão divididos principalmente em duas estruturas:
 * **Review:** possui o jogo avaliado, o texto da avaliação, se ela é positiva ou negativa, número de votos, tempo jogado e outras informações.
 
 As duas estruturas são relacionadas pelo `appid`, que identifica cada jogo. Essa organização facilita a compreensão e o processamento dos dados durante o desenvolvimento do sistema.
+
+
+### Formato das exportacoes
+
+Os notebooks exportam DataFrames como pickle comprimido com gzip (`.pkl.gz`, protocolo 5, nivel 1): catalogo e reviews em `_DadosBrutos/`, dados preparados em `_DadosLimpos/` e alternativas nas pastas `stemming/` e `lematizacao/`. Para ler, use `pd.read_pickle(caminho)`; as colunas de tokens continuam sendo listas Python.
+
+Os arquivos JSON de controle (retomada, limite de requisicoes e cache de popularidade) mantem seu formato. O checkpoint de reviews acompanha `steam_reviews.pkl.gz` como `steam_reviews.pkl.gz.state.json`.
+
+Comparacao no catalogo limpo atual: CSV 276.647.478 bytes; pickle 222.260.830 bytes; pickle com gzip 109.902.712 bytes (60,3% menor que o CSV). A economia depende dos dados. Os CSVs anteriores foram preservados; novas execucoes exportam pickle.

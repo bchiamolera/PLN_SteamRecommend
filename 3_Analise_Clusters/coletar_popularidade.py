@@ -5,7 +5,7 @@ Execute este arquivo para completar/retomar o cache; use --atualizar para renova
 """
 
 import argparse
-import csv
+import pandas as pd
 import json
 import time
 from collections import defaultdict
@@ -21,8 +21,9 @@ CACHE = RAIZ / '_DadosLimpos' / 'popularidade_steamspy.json'
 
 
 def coletar(atualizar=False):
-    with (RAIZ / '_DadosLimpos' / 'jogos_steam.csv').open(encoding='utf-8', newline='') as arquivo:
-        jogos = list(csv.DictReader(arquivo))
+    catalogo = pd.read_pickle(RAIZ / '_DadosLimpos' / 'jogos_steam.pkl.gz')
+    catalogo['genres'] = catalogo['genres'].fillna('')
+    jogos = catalogo[['appid', 'genres']].to_dict('records')
     ids = {int(jogo['appid']) for jogo in jogos}
     generos = sorted({g.strip() for jogo in jogos for g in jogo['genres'].split(';') if g.strip()})
     dados = {'fonte': 'https://steamspy.com/api.php', 'metrica': 'positive + negative',

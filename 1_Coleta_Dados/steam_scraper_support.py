@@ -99,11 +99,11 @@ def steam_get(url, *, params=None, timeout=30, limiter=None, retries=5,
         return response
 
 
-def atomic_csv(df, path):
+def atomic_pickle(df, path):
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_name(path.name + ".tmp")
-    df.to_csv(temporary, index=False, encoding="utf-8-sig")
+    df.to_pickle(temporary, compression={'method': 'gzip', 'compresslevel': 1}, protocol=5)
     os.replace(temporary, path)
 
 
@@ -117,11 +117,11 @@ def load_review_checkpoint(path, quantity, resume):
     if not resume or not path.exists():
         return [], set()
     try:
-        df = pd.read_csv(path, encoding="utf-8-sig")
+        df = pd.read_pickle(path)
     except pd.errors.EmptyDataError:
         df = pd.DataFrame(columns=REVIEW_COLUMNS)
     if not set(REVIEW_COLUMNS).issubset(df.columns):
-        raise ValueError("Review CSV is missing required columns")
+        raise ValueError("Review pickle is missing required columns")
     # Legacy files have no completion ledger; infer only sufficiently full pairs.
     completed = {tuple(key) for key, count in df.groupby(["appid", "review_type"]).size().items()
                  if count >= quantity}
@@ -135,7 +135,7 @@ def load_review_checkpoint(path, quantity, resume):
 
 def save_review_checkpoint(rows, completed, path, quantity):
     # Write data before the ledger so completion never precedes saved results.
-    atomic_csv(pd.DataFrame(rows, columns=REVIEW_COLUMNS), path)
+    atomic_pickle(pd.DataFrame(rows, columns=REVIEW_COLUMNS), path)
     ledger = Path(path).with_suffix(Path(path).suffix + ".state.json")
     temporary = ledger.with_name(ledger.name + ".tmp")
     temporary.write_text(json.dumps({"quantity": quantity,

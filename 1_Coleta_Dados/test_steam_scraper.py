@@ -46,7 +46,7 @@ class ScraperTests(unittest.TestCase):
         ns["save_review_checkpoint"] = Mock()
         games = pd.DataFrame([{"appid": 1, "name": "Small"},
                               {"appid": 2, "name": "Eligible"}])
-        with patch.object(pd, "read_csv", return_value=games):
+        with patch.object(pd, "read_pickle", return_value=games):
             result = ns["coletar_reviews_rapido"](workers=2)
         self.assertEqual(result.groupby(["appid", "review_type"]).size().to_dict(),
                          {(2, "positive"): 10, (2, "negative"): 10})
@@ -76,14 +76,14 @@ class ScraperTests(unittest.TestCase):
     def test_description_limit_and_resume(self):
         ns = notebook_functions()
         ns['buscar_informacoes_jogo'] = Mock(return_value={'description': 'New', 'genres': 'Action'})
-        ns['atomic_csv'] = Mock()
+        ns['atomic_pickle'] = Mock()
         games = pd.DataFrame([
             {'appid': 1, 'name': 'Done', 'description': 'Existing'},
             {'appid': 2, 'name': 'Pending', 'description': ''},
             {'appid': 3, 'name': 'Later', 'description': ''},
         ])
-        with patch.object(pd, 'read_csv', return_value=games):
-            result = ns['atualizar_csv_com_informacoes_rapido'](max_jogos=1)
+        with patch.object(pd, 'read_pickle', return_value=games):
+            result = ns['atualizar_pickle_com_informacoes_rapido'](max_jogos=1)
         self.assertEqual(result['description'].tolist(), ['Existing', 'New', ''])
         self.assertEqual(result.attrs['benchmark']['processed'], 1)
         self.assertEqual(result.attrs['benchmark']['with_description'], 1)
@@ -129,8 +129,8 @@ class ScraperTests(unittest.TestCase):
             "response": {"apps": [{"appid": 10, "name": "Updated"}]}})))
         existing = pd.DataFrame([{"appid": 10, "name": "Old", "user_tags": "Action"},
                                  {"appid": 20, "name": "Other", "user_tags": "Puzzle"}])
-        ns["atomic_csv"] = Mock()
-        with patch.object(Path, "exists", return_value=True), patch.object(pd, "read_csv", return_value=existing):
+        ns["atomic_pickle"] = Mock()
+        with patch.object(Path, "exists", return_value=True), patch.object(pd, "read_pickle", return_value=existing):
             result = ns["listar_jogos_steam"](quantidade=1)
         self.assertEqual(result.set_index("appid").at[10, "user_tags"], "Action")
         self.assertEqual(result.set_index("appid").at[10, "name"], "Updated")
@@ -141,10 +141,10 @@ class ScraperTests(unittest.TestCase):
         ns["buscar_tags_jogo_requests"] = Mock(side_effect=requests.HTTPError())
         ns["criar_driver_selenium"] = Mock()
         ns["buscar_tags_jogo_selenium"] = Mock(return_value=["Action"])
-        ns["atomic_csv"] = Mock()
+        ns["atomic_pickle"] = Mock()
         games = pd.DataFrame([{"appid": 10, "name": "Test"}])
-        with patch.object(pd, "read_csv", return_value=games), patch.object(support, "gate_for", return_value=Mock()):
-            result = ns["atualizar_csv_com_tags_rapido"](workers=1)
+        with patch.object(pd, "read_pickle", return_value=games), patch.object(support, "gate_for", return_value=Mock()):
+            result = ns["atualizar_pickle_com_tags_rapido"](workers=1)
         self.assertEqual(result.at[0, "user_tags"], "Action")
         ns["buscar_tags_jogo_selenium"].assert_called_once()
 
@@ -154,20 +154,20 @@ class ScraperTests(unittest.TestCase):
         ns["load_review_checkpoint"] = Mock(return_value=([], set()))
         ns["save_review_checkpoint"] = Mock()
         games = pd.DataFrame([{"appid": 10, "name": "Test"}])
-        with patch.object(pd, "read_csv", return_value=games):
+        with patch.object(pd, "read_pickle", return_value=games):
             result = ns["coletar_reviews_rapido"](workers=1)
         self.assertEqual(list(pd.read_csv(io.StringIO(result.to_csv(index=False))).columns), support.REVIEW_COLUMNS)
         completed = ns["save_review_checkpoint"].call_args.args[1]
         self.assertEqual(completed, {(10, "positive"), (10, "negative")})
         ns["load_review_checkpoint"].return_value = ([], completed)
         ns["buscar_reviews_jogo"].reset_mock()
-        with patch.object(pd, "read_csv", return_value=games):
+        with patch.object(pd, "read_pickle", return_value=games):
             ns["coletar_reviews_rapido"](workers=1, pular_existentes=True)
         ns["buscar_reviews_jogo"].assert_not_called()
 
     def test_load_zero_result_ledger(self):
-        with patch.object(Path, "exists", return_value=True), patch.object(pd, "read_csv", return_value=pd.DataFrame(columns=support.REVIEW_COLUMNS)), patch.object(Path, "read_text", return_value=json.dumps({"quantity": 10, "completed": [[10, "positive"]]})):
-            rows, completed = support.load_review_checkpoint("reviews.csv", 10, True)
+        with patch.object(Path, "exists", return_value=True), patch.object(pd, "read_pickle", return_value=pd.DataFrame(columns=support.REVIEW_COLUMNS)), patch.object(Path, "read_text", return_value=json.dumps({"quantity": 10, "completed": [[10, "positive"]]})):
+            rows, completed = support.load_review_checkpoint("reviews.pkl.gz", 10, True)
         self.assertEqual(rows, [])
         self.assertEqual(completed, {(10, "positive")})
 
@@ -176,14 +176,14 @@ class ScraperTests(unittest.TestCase):
         ns["buscar_reviews_jogo"] = Mock(side_effect=requests.Timeout())
         ns["load_review_checkpoint"] = Mock(return_value=([], set()))
         ns["save_review_checkpoint"] = Mock()
-        with patch.object(pd, "read_csv", return_value=pd.DataFrame([{"appid": 10, "name": "Test"}])):
+        with patch.object(pd, "read_pickle", return_value=pd.DataFrame([{"appid": 10, "name": "Test"}])):
             ns["coletar_reviews_rapido"](workers=1)
         self.assertEqual(ns["save_review_checkpoint"].call_args.args[1], set())
 
-    def test_checkpoint_does_not_advance_when_csv_write_fails(self):
-        with patch.object(support, "atomic_csv", side_effect=OSError("disk full")), patch.object(Path, "write_text") as write:
+    def test_checkpoint_does_not_advance_when_pickle_write_fails(self):
+        with patch.object(support, "atomic_pickle", side_effect=OSError("disk full")), patch.object(Path, "write_text") as write:
             with self.assertRaises(OSError):
-                support.save_review_checkpoint([], {(10, "positive")}, "reviews.csv", 10)
+                support.save_review_checkpoint([], {(10, "positive")}, "reviews.pkl.gz", 10)
         write.assert_not_called()
 
 
