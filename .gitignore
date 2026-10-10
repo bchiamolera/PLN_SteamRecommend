@@ -221,3 +221,5 @@ __marimo__/
 # Dados serializados
 *.pkl
 *.pkl.gz
+
+.DS_Store
