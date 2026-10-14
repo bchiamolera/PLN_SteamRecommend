@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="610" viewBox="0 0 960 610" role="img" aria-labelledby="title desc">
+  <title id="title">Coesão média por cluster</title>
+  <desc id="desc">Gráfico de barras horizontais da similaridade cosseno média intracluster para dez clusters.</desc>
+  <rect width="960" height="610" fill="#ffffff"/>
+  <text x="480" y="36" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#172033">Coesão média intracluster (cosseno)</text>
+  <text x="480" y="61" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#526079">Quanto maior, mais semelhantes são os documentos do grupo</text>
+  <line x1="170" y1="90" x2="170" y2="540" stroke="#9aa4b2"/>
+  <line x1="170" y1="540" x2="800" y2="540" stroke="#9aa4b2"/>
+  <g font-family="Arial, sans-serif" font-size="13" fill="#526079" text-anchor="middle">
+    <text x="170" y="563">0,00</text><text x="350" y="563">0,02</text><text x="530" y="563">0,04</text><text x="710" y="563">0,06</text><text x="800" y="563">0,07</text>
+  </g>
+  <g stroke="#e5e9f0"><line x1="350" y1="90" x2="350" y2="540"/><line x1="530" y1="90" x2="530" y2="540"/><line x1="710" y1="90" x2="710" y2="540"/><line x1="800" y1="90" x2="800" y2="540"/></g>
+  <g font-family="Arial, sans-serif" font-size="14" fill="#172033">
+    <text x="145" y="119" text-anchor="end">Cluster 0</text><rect x="170" y="101" width="426" height="24" rx="4" fill="#4776e6"/><text x="604" y="119">0,0474</text>
+    <text x="145" y="164" text-anchor="end">Cluster 1</text><rect x="170" y="146" width="54" height="24" rx="4" fill="#d7665a"/><text x="232" y="164">0,0060</text>
+    <text x="145" y="209" text-anchor="end">Cluster 2</text><rect x="170" y="191" width="328" height="24" rx="4" fill="#4776e6"/><text x="506" y="209">0,0364</text>
+    <text x="145" y="254" text-anchor="end">Cluster 3</text><rect x="170" y="236" width="328" height="24" rx="4" fill="#4776e6"/><text x="506" y="254">0,0364</text>
+    <text x="145" y="299" text-anchor="end">Cluster 4</text><rect x="170" y="281" width="588" height="24" rx="4" fill="#2c9c69"/><text x="766" y="299">0,0653</text>
+    <text x="145" y="344" text-anchor="end">Cluster 5</text><rect x="170" y="326" width="189" height="24" rx="4" fill="#4776e6"/><text x="367" y="344">0,0210</text>
+    <text x="145" y="389" text-anchor="end">Cluster 6</text><rect x="170" y="371" width="134" height="24" rx="4" fill="#4776e6"/><text x="312" y="389">0,0149</text>
+    <text x="145" y="434" text-anchor="end">Cluster 7</text><rect x="170" y="416" width="229" height="24" rx="4" fill="#4776e6"/><text x="407" y="434">0,0254</text>
+    <text x="145" y="479" text-anchor="end">Cluster 8</text><rect x="170" y="461" width="470" height="24" rx="4" fill="#4776e6"/><text x="648" y="479">0,0522</text>
+    <text x="145" y="524" text-anchor="end">Cluster 9</text><rect x="170" y="506" width="474" height="24" rx="4" fill="#4776e6"/><text x="652" y="524">0,0526</text>
+  </g>
+  <text x="480" y="592" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#667085">Fonte: saídas do notebook PLN_AnaliseClusters.ipynb</text>
+</svg>
