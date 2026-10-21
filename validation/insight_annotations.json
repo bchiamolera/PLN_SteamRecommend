@@ -1,0 +1,496 @@
+[
+  {
+    "appid": 20,
+    "game": "Team Fortress Classic",
+    "review_id": "22a291312d58ef015e45617c02ca6afdf9df837db9c431a15cee8ae83d50e1ab",
+    "text": "perhaps that was just the quirk of the server I landed on.",
+    "expected": []
+  },
+  {
+    "appid": 20,
+    "game": "Team Fortress Classic",
+    "review_id": "1ba3a76223525faa60762638f9c241020062a6c6bfad96510abdaec384ea70f9",
+    "text": "It has that real life foto texture thing from Half-Life",
+    "expected": []
+  },
+  {
+    "appid": 20,
+    "game": "Team Fortress Classic",
+    "review_id": "1ba3a76223525faa60762638f9c241020062a6c6bfad96510abdaec384ea70f9",
+    "text": "I feel like it would be mad unfair in multiplayer ngl)",
+    "expected": [
+      {
+        "aspect": "multiplayer",
+        "polarity": "negative"
+      }
+    ]
+  },
+  {
+    "appid": 20,
+    "game": "Team Fortress Classic",
+    "review_id": "1ba3a76223525faa60762638f9c241020062a6c6bfad96510abdaec384ea70f9",
+    "text": "Another thing is that stuff like the demolition man's grenades (the one from his grenade launcher not the throwing ones) has the same texture no mather the team.",
+    "expected": [
+      {
+        "aspect": "graphics",
+        "polarity": "negative"
+      }
+    ]
+  },
+  {
+    "appid": 20,
+    "game": "Team Fortress Classic",
+    "review_id": "1ba3a76223525faa60762638f9c241020062a6c6bfad96510abdaec384ea70f9",
+    "text": "it dosent make sense that pyro has a male voice because in the TF2 comic's TF Classic Pyro is a woman.",
+    "expected": [
+      {
+        "aspect": "audio",
+        "polarity": "negative"
+      }
+    ]
+  },
+  {
+    "appid": 20,
+    "game": "Team Fortress Classic",
+    "review_id": "22a291312d58ef015e45617c02ca6afdf9df837db9c431a15cee8ae83d50e1ab",
+    "text": "No healing visual, no charge, no uber, just a box that you have to be close enough to your target that their readout pops up in the lower left corner of the screen so you can initiate healing.",
+    "expected": [],
+    "annotation_note": "Healing visual feedback is not necessarily graphics quality."
+  },
+  {
+    "appid": 20,
+    "game": "Team Fortress Classic",
+    "review_id": "1ba3a76223525faa60762638f9c241020062a6c6bfad96510abdaec384ea70f9",
+    "text": "Every mercenary uses the same voice which might have been to save cost",
+    "expected": []
+  },
+  {
+    "appid": 20,
+    "game": "Team Fortress Classic",
+    "review_id": "22a291312d58ef015e45617c02ca6afdf9df837db9c431a15cee8ae83d50e1ab",
+    "text": "I booted into a populated server.",
+    "expected": []
+  },
+  {
+    "appid": 20,
+    "game": "Team Fortress Classic",
+    "review_id": "446c6d681ffcc8501ccaadbb8b65b802ed4554c2d5cd4a38f543722171eb75f1",
+    "text": "This is game great its alot moddable than Tf2 cuz of the servers having the half life files",
+    "expected": [
+      {
+        "aspect": "multiplayer",
+        "polarity": "positive"
+      }
+    ]
+  },
+  {
+    "appid": 20,
+    "game": "Team Fortress Classic",
+    "review_id": "eb9e621eb113572c67eaef31b43acfbe210fd05e08ca86d9058d7ad6f4d4110e",
+    "text": "There are tons of servers,",
+    "expected": []
+  },
+  {
+    "appid": 50,
+    "game": "Half-Life: Opposing Force",
+    "review_id": "7e243e9575e41413c70a38c1105b551a22219f4fe4643ec42fbf77bfcfa0f1d4",
+    "text": "Might otherwise be worse than HL especially due to many bugs (elevator bug, crash upon saving, etc ...",
+    "expected": [
+      {
+        "aspect": "bugs",
+        "polarity": "negative"
+      }
+    ]
+  },
+  {
+    "appid": 50,
+    "game": "Half-Life: Opposing Force",
+    "review_id": "ab408b8dd1393dcbfd427d55e76d9837630181506ef42565db999eff473cbc4d",
+    "text": "If you want an actually good game that adds to the lore of the story, I'd just recommend you get Blue Shift.",
+    "expected": [],
+    "annotation_note": "Recommends a different title (Blue Shift), not the reviewed game."
+  },
+  {
+    "appid": 50,
+    "game": "Half-Life: Opposing Force",
+    "review_id": "ab408b8dd1393dcbfd427d55e76d9837630181506ef42565db999eff473cbc4d",
+    "text": "The gameplay doesn't help either, it is absurdly difficult for no apparent reason with the last 40% of the game being \"random ♥♥♥♥♥♥♥♥, go!",
+    "expected": [
+      {
+        "aspect": "gameplay",
+        "polarity": "negative"
+      }
+    ]
+  },
+  {
+    "appid": 50,
+    "game": "Half-Life: Opposing Force",
+    "review_id": "38e480f90f49d0d2c59a037856cc339568b7994a02ec139f7b354a69cece7b2e",
+    "text": "on top of that game balance on hard is ridiculous - every enemy tanks 6 shots from shotgun, you get 10 hp from healing pack",
+    "expected": [
+      {
+        "aspect": "difficulty",
+        "polarity": "negative"
+      }
+    ]
+  },
+  {
+    "appid": 50,
+    "game": "Half-Life: Opposing Force",
+    "review_id": "c528ec773b285ede036916e7f87b3f85b22792814413dea3a48e823232563c77",
+    "text": "Adrian is automatically a golden boy because of his elite training, as opposed to the other protagonists in the series (Freeman, Calhoun, Vance, Cross/Green), who are all pretty normal people with very little (even 0) real combat experience.",
+    "expected": [],
+    "annotation_note": "Real-world combat experience of characters, not an opinion on gameplay."
+  },
+  {
+    "appid": 50,
+    "game": "Half-Life: Opposing Force",
+    "review_id": "38e480f90f49d0d2c59a037856cc339568b7994a02ec139f7b354a69cece7b2e",
+    "text": "The experience just lacks any sort of direction, while trying to spice things up with random mechanics like \"squad\" \"\"management\"\" or \"rope climbing\" which really dont add anything at the end of the day.",
+    "expected": [
+      {
+        "aspect": "gameplay",
+        "polarity": "negative"
+      }
+    ]
+  },
+  {
+    "appid": 50,
+    "game": "Half-Life: Opposing Force",
+    "review_id": "811390f57d0bb0204b014b6e303fdb908b1d411f04101f0671f12491828eab00",
+    "text": "works on modern systems with only one crash for me!",
+    "expected": []
+  },
+  {
+    "appid": 50,
+    "game": "Half-Life: Opposing Force",
+    "review_id": "d2fcc9e8a78bf9d7d7beeb47515e4e821c3f56aba095f687ec4aa4735498f092",
+    "text": "Blue Shift The gameplay felt more engaging",
+    "expected": [],
+    "annotation_note": "Explicitly discusses Blue Shift, a different game."
+  },
+  {
+    "appid": 50,
+    "game": "Half-Life: Opposing Force",
+    "review_id": "c528ec773b285ede036916e7f87b3f85b22792814413dea3a48e823232563c77",
+    "text": "The story sucks.",
+    "expected": [
+      {
+        "aspect": "story",
+        "polarity": "negative"
+      }
+    ]
+  },
+  {
+    "appid": 50,
+    "game": "Half-Life: Opposing Force",
+    "review_id": "ab408b8dd1393dcbfd427d55e76d9837630181506ef42565db999eff473cbc4d",
+    "text": "You get to see the perspective of Barney throughout the resonance cascade, an important character who's story between Half-Life 1",
+    "expected": []
+  },
+  {
+    "appid": 80,
+    "game": "Counter-Strike: Condition Zero",
+    "review_id": "b75d19505f958de4020946290f76bf77db8d8604e504e3e7bf5756a637c5c33f",
+    "text": "with improved graphics, new maps, bot support without mods",
+    "expected": [
+      {
+        "aspect": "graphics",
+        "polarity": "positive"
+      }
+    ]
+  },
+  {
+    "appid": 80,
+    "game": "Counter-Strike: Condition Zero",
+    "review_id": "f8e04793fdad51dd3d1b7fe39f185f64cd39048783eea3b44d03ef19507de46b",
+    "text": "This makes combat encounters extremely frustrating",
+    "expected": [
+      {
+        "aspect": "gameplay",
+        "polarity": "negative"
+      }
+    ]
+  },
+  {
+    "appid": 80,
+    "game": "Counter-Strike: Condition Zero",
+    "review_id": "05466e9f2b9d0953a81709dd377602979d62d335c1869b3df43d243d1332194f",
+    "text": "nostalgic value.",
+    "expected": [],
+    "annotation_note": "Nostalgic value is not monetary value."
+  },
+  {
+    "appid": 80,
+    "game": "Counter-Strike: Condition Zero",
+    "review_id": "f8e04793fdad51dd3d1b7fe39f185f64cd39048783eea3b44d03ef19507de46b",
+    "text": "[h1] OK Multiplayer, Awful Single Player [/h1] Counter-Strike: Condition Zero is a game of two parts.",
+    "expected": [
+      {
+        "aspect": "multiplayer",
+        "polarity": "positive"
+      }
+    ]
+  },
+  {
+    "appid": 80,
+    "game": "Counter-Strike: Condition Zero",
+    "review_id": "f8e04793fdad51dd3d1b7fe39f185f64cd39048783eea3b44d03ef19507de46b",
+    "text": "far too complicated to make standard multiplayer enjoyable.",
+    "expected": [
+      {
+        "aspect": "multiplayer",
+        "polarity": "negative"
+      }
+    ]
+  },
+  {
+    "appid": 80,
+    "game": "Counter-Strike: Condition Zero",
+    "review_id": "05466e9f2b9d0953a81709dd377602979d62d335c1869b3df43d243d1332194f",
+    "text": "**Definitely worth playing for classic FPS fans!",
+    "expected": [],
+    "annotation_note": "FPS is a shooter genre here, not performance."
+  },
+  {
+    "appid": 80,
+    "game": "Counter-Strike: Condition Zero",
+    "review_id": "05466e9f2b9d0953a81709dd377602979d62d335c1869b3df43d243d1332194f",
+    "text": "It keeps the familiar Counter-Strike gameplay while adding a single-player experience with missions",
+    "expected": []
+  },
+  {
+    "appid": 80,
+    "game": "Counter-Strike: Condition Zero",
+    "review_id": "05466e9f2b9d0953a81709dd377602979d62d335c1869b3df43d243d1332194f",
+    "text": "the game has that old-school FPS atmosphere that is hard to find in modern shooters.",
+    "expected": [],
+    "annotation_note": "FPS is a shooter genre here, not performance."
+  },
+  {
+    "appid": 80,
+    "game": "Counter-Strike: Condition Zero",
+    "review_id": "f8e04793fdad51dd3d1b7fe39f185f64cd39048783eea3b44d03ef19507de46b",
+    "text": "objectives to do which is the only thing keeping me coming back because it certainly wasn't the gameplay.",
+    "expected": [
+      {
+        "aspect": "gameplay",
+        "polarity": "negative"
+      }
+    ]
+  },
+  {
+    "appid": 80,
+    "game": "Counter-Strike: Condition Zero",
+    "review_id": "54efe7c875e3c595daac7ea6c7525f261a3bfdb572c86b1fbe737cb48b94aa3f",
+    "text": "6 remake with revamped textures that also still runs in the old goldsrc engine",
+    "expected": [
+      {
+        "aspect": "graphics",
+        "polarity": "positive"
+      }
+    ]
+  },
+  {
+    "appid": 1200,
+    "game": "Red Orchestra: Ostfront 41-45",
+    "review_id": "5c1a10694a207f98927a242553d4e40e204568bb043355f940d8bd66a4d1f755",
+    "text": "Because the server is dead (no one playing, maybe I'm not on the right time), I playing with three roles (Cmd, Driver, Gunner) with Bots.",
+    "expected": [
+      {
+        "aspect": "multiplayer",
+        "polarity": "negative"
+      }
+    ]
+  },
+  {
+    "appid": 1200,
+    "game": "Red Orchestra: Ostfront 41-45",
+    "review_id": "538123eee77cdfe65a2a0157cbf08d59f98e47eba50095e95f285dca167ee3dd",
+    "text": "smgs at high distances, im know it can be some balistics mechanics",
+    "expected": []
+  },
+  {
+    "appid": 1200,
+    "game": "Red Orchestra: Ostfront 41-45",
+    "review_id": "5c1a10694a207f98927a242553d4e40e204568bb043355f940d8bd66a4d1f755",
+    "text": "The mechanic of this game is Medium-Level, for new player.",
+    "expected": []
+  },
+  {
+    "appid": 1200,
+    "game": "Red Orchestra: Ostfront 41-45",
+    "review_id": "7f59930384e43046f3cdbe61253a93c5a9552921c20bfd0a789ca58a16e86714",
+    "text": "Amazing gameplay.",
+    "expected": [
+      {
+        "aspect": "gameplay",
+        "polarity": "positive"
+      }
+    ]
+  },
+  {
+    "appid": 1200,
+    "game": "Red Orchestra: Ostfront 41-45",
+    "review_id": "9a61762a9a2bf63fa0176cbb006478129980e4ef16e301c789ab2abf7473787b",
+    "text": "[i]Mare Nostrum[/i] give this game such a beautiful expansion that makes it well worth the price of admission.",
+    "expected": [
+      {
+        "aspect": "value",
+        "polarity": "positive"
+      }
+    ]
+  },
+  {
+    "appid": 1200,
+    "game": "Red Orchestra: Ostfront 41-45",
+    "review_id": "538123eee77cdfe65a2a0157cbf08d59f98e47eba50095e95f285dca167ee3dd",
+    "text": "horde of bots (if server allow this) are chasing me, while i'm can't do anything becouse since 2024 i don't have enough time to spend to all these tricky shooters",
+    "expected": []
+  },
+  {
+    "appid": 1200,
+    "game": "Red Orchestra: Ostfront 41-45",
+    "review_id": "e4e876bea063fa23c5104e1a48376d75a998d717bb1f0374882524e3172a151c",
+    "text": "Graphics a bit dated",
+    "expected": [
+      {
+        "aspect": "graphics",
+        "polarity": "negative"
+      }
+    ]
+  },
+  {
+    "appid": 1200,
+    "game": "Red Orchestra: Ostfront 41-45",
+    "review_id": "538123eee77cdfe65a2a0157cbf08d59f98e47eba50095e95f285dca167ee3dd",
+    "text": "Also i wanted to metion strange fire mechanic, this problem are lying in that — that while aiming",
+    "expected": [
+      {
+        "aspect": "gameplay",
+        "polarity": "negative"
+      }
+    ]
+  },
+  {
+    "appid": 1200,
+    "game": "Red Orchestra: Ostfront 41-45",
+    "review_id": "7f59930384e43046f3cdbe61253a93c5a9552921c20bfd0a789ca58a16e86714",
+    "text": "If you are a fan of old WW2 FPS games, you should definitely try this.",
+    "expected": [],
+    "annotation_note": "FPS is a shooter genre here, not performance."
+  },
+  {
+    "appid": 1200,
+    "game": "Red Orchestra: Ostfront 41-45",
+    "review_id": "5c1a10694a207f98927a242553d4e40e204568bb043355f940d8bd66a4d1f755",
+    "text": "I can take down over 5 enemy Panzers, when the difficulty set to Front-Line Soldier :D",
+    "expected": []
+  },
+  {
+    "appid": 1250,
+    "game": "Killing Floor",
+    "review_id": "933448e1478e96e8d254e41694dac773969fe604c09b39e2188ba44d3325473b",
+    "text": "On top of that, there's a Russian who's been DDoS-ing the servers for years now, which makes the game hard to play.",
+    "expected": [
+      {
+        "aspect": "multiplayer",
+        "polarity": "negative"
+      }
+    ]
+  },
+  {
+    "appid": 1250,
+    "game": "Killing Floor",
+    "review_id": "edae8c465091c9907bc91b347b45914e6f1ce18cc5378c7b8ecd921ed266bb46",
+    "text": "it's impossible to find any servers that host vanilla.",
+    "expected": [
+      {
+        "aspect": "multiplayer",
+        "polarity": "negative"
+      }
+    ]
+  },
+  {
+    "appid": 1250,
+    "game": "Killing Floor",
+    "review_id": "4c7f5ddde903fca691a6d1df7c36bee381313bfa347dd99b2a7acf9bea58cead",
+    "text": "Besides that, there is better ones in this Genre nowadays to play, as sad as it sounds, its sadly the Truth.",
+    "expected": []
+  },
+  {
+    "appid": 1250,
+    "game": "Killing Floor",
+    "review_id": "152c130785b0056ac455f06d583bc4a921ae632689fd0d5bb81987432f6cf8d2",
+    "text": "no one plays it anymore, also too many level locked servers hardly can play this game so dumb get rid of thta ♥♥♥♥....",
+    "expected": [
+      {
+        "aspect": "multiplayer",
+        "polarity": "negative"
+      }
+    ]
+  },
+  {
+    "appid": 1250,
+    "game": "Killing Floor",
+    "review_id": "edae8c465091c9907bc91b347b45914e6f1ce18cc5378c7b8ecd921ed266bb46",
+    "text": "All of the game's 200 players are in silly gimmick servers.",
+    "expected": [
+      {
+        "aspect": "multiplayer",
+        "polarity": "negative"
+      }
+    ]
+  },
+  {
+    "appid": 1250,
+    "game": "Killing Floor",
+    "review_id": "4c7f5ddde903fca691a6d1df7c36bee381313bfa347dd99b2a7acf9bea58cead",
+    "text": "So my consensis: If you do have a Server",
+    "expected": []
+  },
+  {
+    "appid": 1250,
+    "game": "Killing Floor",
+    "review_id": "c4f7d68a8e9d97d1ffe03c2ba9105aba5f3dd7a836111e93f6aee3c4bf3fde7e",
+    "text": "nvm got it to work after reinstalling over 12+ times, then randomly i could open multiplayer again, had to do so over",
+    "expected": [],
+    "annotation_note": "Mixed recovery/workaround context; abstain."
+  },
+  {
+    "appid": 1250,
+    "game": "Killing Floor",
+    "review_id": "c4f7d68a8e9d97d1ffe03c2ba9105aba5f3dd7a836111e93f6aee3c4bf3fde7e",
+    "text": "no can't use multiplayer or even open the workshop subscriptions in game (they wont download anyway), wtf anyone got any idea whats going on/how to fix?",
+    "expected": [
+      {
+        "aspect": "multiplayer",
+        "polarity": "negative"
+      }
+    ]
+  },
+  {
+    "appid": 1250,
+    "game": "Killing Floor",
+    "review_id": "4c7f5ddde903fca691a6d1df7c36bee381313bfa347dd99b2a7acf9bea58cead",
+    "text": "its barely even playable, especially if you dont have your Own Server.",
+    "expected": [
+      {
+        "aspect": "multiplayer",
+        "polarity": "negative"
+      }
+    ]
+  },
+  {
+    "appid": 1250,
+    "game": "Killing Floor",
+    "review_id": "c4f7d68a8e9d97d1ffe03c2ba9105aba5f3dd7a836111e93f6aee3c4bf3fde7e",
+    "text": "would be great if the workshop ♥♥♥♥♥♥♥ worked, that or the MULTIPLAYER,",
+    "expected": [
+      {
+        "aspect": "multiplayer",
+        "polarity": "negative"
+      }
+    ]
+  }
+]

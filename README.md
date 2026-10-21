@@ -1,5 +1,13 @@
 # PLN Steam Recommend
 
+## Demo web: Django + React
+
+O projeto inclui uma API Django REST e uma interface React/TypeScript para busca
+Word2Vec, detalhes dos jogos e pontos positivos/negativos com evidências das reviews.
+Consulte [instalação, preparação dos dados e contrato da API](docs/web-demo.md).
+O demo usa os dados locais sem chave Steam; coleta autenticada requer `STEAM_API_KEY`
+configurada apenas no ambiente do backend ou em `.env`.
+
 Projeto de Processamento de Linguagem Natural aplicado ao catálogo e às avaliações de jogos da Steam. O objetivo é explorar descrições e opiniões de usuários para agrupar jogos, recuperar títulos relevantes, prever recomendações e extrair informação linguística.
 
 ## Dicionário dos dados

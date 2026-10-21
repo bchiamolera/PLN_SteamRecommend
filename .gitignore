@@ -223,3 +223,10 @@ __marimo__/
 *.pkl.gz
 
 .DS_Store
+
+# Local web demo data, models, and frontend build output
+artifacts/
+frontend/node_modules/
+frontend/dist/
+frontend/*.tsbuildinfo
+validation/local_*.json

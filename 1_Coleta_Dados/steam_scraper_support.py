@@ -80,11 +80,14 @@ def steam_get(url, *, params=None, timeout=30, limiter=None, retries=5,
         try:
             response = client.get(url, params=params, timeout=timeout,
                                   headers=headers, cookies=cookies)
-        except (requests.Timeout, requests.ConnectionError):
+        except (requests.Timeout, requests.ConnectionError) as exc:
             gate.defer(backoff)
             if attempt == retries - 1:
-                raise
+                # requests exceptions can include the full URL and API key.
+                raise type(exc)(f"Steam request failed at {urlsplit(url).netloc}; check connectivity.") from None
             continue
+        except requests.RequestException:
+            raise requests.RequestException(f"Steam request failed at {urlsplit(url).netloc}.") from None
         if response.status_code in (429, 500, 502, 503, 504):
             delay = retry_delay(response.headers.get("Retry-After"), backoff)
             logging.getLogger(__name__).warning(
@@ -95,7 +98,10 @@ def steam_get(url, *, params=None, timeout=30, limiter=None, retries=5,
             if attempt < retries - 1:
                 response.close()
                 continue
-        response.raise_for_status()
+        try:
+            response.raise_for_status()
+        except requests.HTTPError:
+            raise requests.HTTPError(f"Steam returned HTTP {response.status_code} at {urlsplit(url).netloc}.") from None
         return response
 
 

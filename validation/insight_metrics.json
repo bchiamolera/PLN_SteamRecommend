@@ -1,0 +1,11 @@
+{
+  "analysis_version": "aspects-clauses-v3",
+  "clauses": 50,
+  "games": 5,
+  "predicted_points": 5,
+  "correct_points": 5,
+  "precision": 1.0,
+  "clause_coverage": 0.1,
+  "point_recall": 0.18518518518518517,
+  "false_positives": []
+}

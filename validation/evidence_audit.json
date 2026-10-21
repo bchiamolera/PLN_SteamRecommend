@@ -1,0 +1,10 @@
+{
+  "analysis_version": "aspects-clauses-v3",
+  "games_with_reviews": 29625,
+  "prepared_games": 29625,
+  "analyzed_reviews": 395256,
+  "imported_reviews": 395256,
+  "checked_excerpts": 28686,
+  "errors": [],
+  "complete": true
+}

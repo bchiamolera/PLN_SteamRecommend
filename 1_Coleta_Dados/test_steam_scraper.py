@@ -27,6 +27,21 @@ def notebook_functions():
 
 
 class ScraperTests(unittest.TestCase):
+    def test_authenticated_request_errors_do_not_expose_keys(self):
+        secret = "test-key-never-log"
+        url = "https://api.steampowered.com/test"
+        for error in (requests.Timeout(f"{url}?key={secret}"), requests.ConnectionError(f"{url}?key={secret}")):
+            with self.subTest(error=type(error).__name__), patch.object(support, "gate_for", return_value=Mock()):
+                with self.assertRaises(requests.RequestException) as caught:
+                    support.steam_get(url, params={"key": secret}, retries=1, session=Mock(get=Mock(side_effect=error)))
+                self.assertNotIn(secret, str(caught.exception))
+        response = Mock(status_code=403, headers={})
+        response.raise_for_status.side_effect = requests.HTTPError(f"403: {url}?key={secret}")
+        with patch.object(support, "gate_for", return_value=Mock()):
+            with self.assertRaises(requests.HTTPError) as caught:
+                support.steam_get(url, params={"key": secret}, session=Mock(get=Mock(return_value=response)))
+        self.assertNotIn(secret, str(caught.exception))
+
     def test_fast_collection_filters_games_and_limits_both_sentiments(self):
         ns = notebook_functions()
         def response(url, *, params, **kwargs):

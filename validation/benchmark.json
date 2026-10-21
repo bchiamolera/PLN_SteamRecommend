@@ -1,0 +1,55 @@
+{
+  "games": 179464,
+  "reviews": 395256,
+  "prepared_games": 29625,
+  "cold_search_seconds": 1.6844,
+  "warm_search_median_seconds": 0.0851,
+  "warm_search_max_seconds": 0.0925,
+  "warm_search_target_met": true,
+  "backend_rss_mb": 348.3,
+  "artifact_size_mb": 206.8,
+  "offline_without_key": true,
+  "query": "Explore an open world and build a base to survive with friends",
+  "top_results": [
+    {
+      "appid": 2141620,
+      "name": "Landiscape"
+    },
+    {
+      "appid": 3435890,
+      "name": "Isle of Survival: The New Dawn"
+    },
+    {
+      "appid": 655780,
+      "name": "Project 5: Sightseer"
+    },
+    {
+      "appid": 2313330,
+      "name": "TerraTech Worlds"
+    },
+    {
+      "appid": 2868100,
+      "name": "Shamania"
+    },
+    {
+      "appid": 717790,
+      "name": "Hold Your Own"
+    },
+    {
+      "appid": 1337910,
+      "name": "Dead Earth Zombies"
+    },
+    {
+      "appid": 2503600,
+      "name": "the ISLE survival"
+    },
+    {
+      "appid": 4562650,
+      "name": "Island of the Lost"
+    },
+    {
+      "appid": 3889860,
+      "name": "Ash Survival"
+    }
+  ]
+}
