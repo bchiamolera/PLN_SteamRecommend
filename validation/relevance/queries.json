@@ -1,0 +1,585 @@
+{
+  "schema_version": 1,
+  "catalog_fingerprint": "92884668028eeeadb1998524bd07d74cf871b13fd40ce9f020c27f4a2cb7e7c4",
+  "queries": [
+    {
+      "id": "q001",
+      "q": "Explore an open world and build a base to survive with friends",
+      "category": "descriptive",
+      "split": "dev",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q002",
+      "q": "A relaxing farming game in a small village",
+      "category": "descriptive",
+      "split": "dev",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q003",
+      "q": "A detective adventure about solving a mysterious crime",
+      "category": "descriptive",
+      "split": "test",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q004",
+      "q": "A story about difficult choices and their consequences",
+      "category": "descriptive",
+      "split": "dev",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q005",
+      "q": "Build a city and manage its economy",
+      "category": "descriptive",
+      "split": "dev",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q006",
+      "q": "Explore space and trade between planets",
+      "category": "descriptive",
+      "split": "test",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q007",
+      "q": "A frightening adventure with puzzles and a strong atmosphere",
+      "category": "descriptive",
+      "split": "dev",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q008",
+      "q": "A tactical game with turn based battles",
+      "category": "descriptive",
+      "split": "dev",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q009",
+      "q": "A fast arcade game with short sessions",
+      "category": "descriptive",
+      "split": "test",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q010",
+      "q": "Run a restaurant and serve customers",
+      "category": "descriptive",
+      "split": "dev",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q011",
+      "q": "Explore ancient ruins and solve environmental puzzles",
+      "category": "descriptive",
+      "split": "dev",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q012",
+      "q": "A colorful platform game with precise movement",
+      "category": "descriptive",
+      "split": "test",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q013",
+      "q": "A fantasy adventure with character progression",
+      "category": "descriptive",
+      "split": "dev",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q014",
+      "q": "Manage a colony and keep its people alive",
+      "category": "descriptive",
+      "split": "dev",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q015",
+      "q": "A peaceful exploration game without fighting",
+      "category": "descriptive",
+      "split": "test",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q016",
+      "q": "A game about sailing and discovering islands",
+      "category": "descriptive",
+      "split": "dev",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q017",
+      "q": "Build automated factories and production lines",
+      "category": "descriptive",
+      "split": "dev",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q018",
+      "q": "A narrative adventure about friendship and loss",
+      "category": "descriptive",
+      "split": "test",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q019",
+      "q": "Survive winter by collecting food and building shelter",
+      "category": "descriptive",
+      "split": "dev",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q020",
+      "q": "A sports game to play with friends",
+      "category": "descriptive",
+      "split": "dev",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q021",
+      "q": "Portal 2",
+      "category": "exact_title",
+      "split": "test",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q022",
+      "q": "Half-Life 2",
+      "category": "exact_title",
+      "split": "dev",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q023",
+      "q": "Stardew Valley",
+      "category": "exact_title",
+      "split": "dev",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q024",
+      "q": "Terraria",
+      "category": "exact_title",
+      "split": "test",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q025",
+      "q": "Hades",
+      "category": "exact_title",
+      "split": "dev",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q026",
+      "q": "Celeste",
+      "category": "exact_title",
+      "split": "dev",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q027",
+      "q": "Dota 2",
+      "category": "exact_title",
+      "split": "test",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q028",
+      "q": "Counter-Strike 2",
+      "category": "exact_title",
+      "split": "dev",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q029",
+      "q": "Euro Truck Simulator 2",
+      "category": "exact_title",
+      "split": "dev",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q030",
+      "q": "The Witcher 3: Wild Hunt",
+      "category": "exact_title",
+      "split": "test",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q031",
+      "q": "Solve puzzles together with a friend",
+      "category": "mechanics",
+      "split": "dev",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory.",
+      "intent_tags": [
+        "Co-op",
+        "Puzzle"
+      ]
+    },
+    {
+      "id": "q032",
+      "q": "Defend a base by building towers",
+      "category": "mechanics",
+      "split": "dev",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory.",
+      "intent_tags": [
+        "Tower Defense"
+      ]
+    },
+    {
+      "id": "q033",
+      "q": "Race cars on challenging tracks",
+      "category": "mechanics",
+      "split": "test",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory.",
+      "intent_tags": [
+        "Racing"
+      ]
+    },
+    {
+      "id": "q034",
+      "q": "A fishing simulation",
+      "category": "mechanics",
+      "split": "dev",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory.",
+      "intent_tags": [
+        "Fishing"
+      ]
+    },
+    {
+      "id": "q035",
+      "q": "Build complex automated factories",
+      "category": "mechanics",
+      "split": "dev",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory.",
+      "intent_tags": [
+        "Automation"
+      ]
+    },
+    {
+      "id": "q036",
+      "q": "Turn based strategy battles",
+      "category": "mechanics",
+      "split": "test",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory.",
+      "intent_tags": [
+        "Turn-Based Strategy"
+      ]
+    },
+    {
+      "id": "q037",
+      "q": "A visual novel with choices",
+      "category": "mechanics",
+      "split": "dev",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory.",
+      "intent_tags": [
+        "Visual Novel"
+      ]
+    },
+    {
+      "id": "q038",
+      "q": "Explore a metroidvania world",
+      "category": "mechanics",
+      "split": "dev",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory.",
+      "intent_tags": [
+        "Metroidvania"
+      ]
+    },
+    {
+      "id": "q039",
+      "q": "A roguelike dungeon crawler",
+      "category": "mechanics",
+      "split": "test",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory.",
+      "intent_tags": [
+        "Roguelike"
+      ]
+    },
+    {
+      "id": "q040",
+      "q": "Play a rhythm game with music",
+      "category": "mechanics",
+      "split": "dev",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory.",
+      "intent_tags": [
+        "Rhythm"
+      ]
+    },
+    {
+      "id": "q041",
+      "q": "Survive and build a base with friends",
+      "category": "filters",
+      "split": "dev",
+      "filters": {
+        "required_tag": [
+          "Co-op",
+          "Survival"
+        ]
+      },
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q042",
+      "q": "Cooperative puzzles without zombies",
+      "category": "filters",
+      "split": "test",
+      "filters": {
+        "required_tag": [
+          "Co-op",
+          "Puzzle"
+        ],
+        "excluded_tag": [
+          "Zombies"
+        ]
+      },
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q043",
+      "q": "Explore a fantasy world with character progression",
+      "category": "filters",
+      "split": "dev",
+      "filters": {
+        "genre": [
+          "RPG"
+        ]
+      },
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q044",
+      "q": "A single player mystery adventure",
+      "category": "filters",
+      "split": "dev",
+      "filters": {
+        "required_tag": [
+          "Singleplayer"
+        ],
+        "genre": [
+          "Adventure"
+        ]
+      },
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q045",
+      "q": "A racing game without horror",
+      "category": "filters",
+      "split": "test",
+      "filters": {
+        "genre": [
+          "Racing"
+        ],
+        "excluded_tag": [
+          "Horror"
+        ]
+      },
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q046",
+      "q": "A strategy game without zombies",
+      "category": "filters",
+      "split": "dev",
+      "filters": {
+        "genre": [
+          "Strategy"
+        ],
+        "excluded_tag": [
+          "Zombies"
+        ]
+      },
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q047",
+      "q": "A relaxing adventure without horror",
+      "category": "filters",
+      "split": "dev",
+      "filters": {
+        "genre": [
+          "Adventure"
+        ],
+        "excluded_tag": [
+          "Horror"
+        ]
+      },
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q048",
+      "q": "Survival games without zombies",
+      "category": "filters",
+      "split": "test",
+      "filters": {
+        "required_tag": [
+          "Survival"
+        ],
+        "excluded_tag": [
+          "Zombies"
+        ]
+      },
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q049",
+      "q": "A puzzle game with a story",
+      "category": "filters",
+      "split": "dev",
+      "filters": {
+        "genre": [
+          "Adventure",
+          "Indie"
+        ],
+        "required_tag": [
+          "Puzzle"
+        ]
+      },
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q050",
+      "q": "A cooperative adventure",
+      "category": "filters",
+      "split": "dev",
+      "filters": {
+        "required_tag": [
+          "Co-op"
+        ],
+        "genre": [
+          "Adventure"
+        ]
+      },
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q051",
+      "q": "cooperativ survial base bilding",
+      "category": "rare_terms",
+      "split": "test",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q052",
+      "q": "metroidvania exploration",
+      "category": "rare_terms",
+      "split": "dev",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q053",
+      "q": "deckbuilding roguelike",
+      "category": "rare_terms",
+      "split": "dev",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q054",
+      "q": "dieselpunk airship adventure",
+      "category": "rare_terms",
+      "split": "test",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q055",
+      "q": "sokoban puzzle",
+      "category": "rare_terms",
+      "split": "dev",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q056",
+      "q": "zzqxvplmnonexistentword",
+      "category": "hard",
+      "split": "dev",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory.",
+      "no_interpretable_intent": true
+    },
+    {
+      "id": "q057",
+      "q": "Survive with friends without building a base",
+      "category": "hard",
+      "split": "test",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q058",
+      "q": "An adventure without combat or violence",
+      "category": "hard",
+      "split": "dev",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q059",
+      "q": "A game about time travel with no puzzles",
+      "category": "hard",
+      "split": "dev",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    },
+    {
+      "id": "q060",
+      "q": "Cooperative horror without zombies",
+      "category": "hard",
+      "split": "test",
+      "filters": {},
+      "expected_behavior": "Rank by relevance to the query intent; structured constraints are mandatory."
+    }
+  ]
+}

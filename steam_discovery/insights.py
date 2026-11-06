@@ -99,6 +99,26 @@ class AspectAnalyzer:
             results[index].extend(self.from_doc(doc))
         yield from results
 
+ASPECT_LABELS = {
+    "gameplay": "Gameplay", "story": "Story", "graphics": "Visual presentation",
+    "audio": "Audio", "controls": "Controls", "performance": "Performance",
+    "bugs": "Bug-related experience", "multiplayer": "Multiplayer",
+    "difficulty": "Difficulty", "replayability": "Replayability", "value": "Value",
+}
+
+
+def summarize_points(points, polarity):
+    """Render prepared aspect polarity without inventing more specific claims.
+
+    Keep the stored analysis and evidence unchanged; no model runs at serving time.
+    """
+    outcome = {"positive": "strength", "negative": "drawback"}[polarity]
+    return [
+        {**point, "summary": f"{ASPECT_LABELS[point['aspect']]} is a recurring {outcome}."}
+        for point in points
+    ]
+
+
 def aggregate(observations):
     """Input: (review_id, observations). Count distinct reviews and retain evidence."""
     groups = defaultdict(dict)

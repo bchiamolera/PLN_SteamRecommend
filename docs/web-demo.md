@@ -1,13 +1,19 @@
-# Steam Atlas: local web demo
+# Steam Atlas: demonstração web local
 
-The Django REST API serves prepared Steam data to a separate React application.
-Search uses the original 190-dimensional Word2Vec model. Review points use
-spaCy dependencies and VADER; they are extractive observations, not generated summaries.
+A API Django fornece dados preparados para uma interface React. O sistema oferece
+Word2Vec como referência e quatro métodos experimentais de comparação, além de
+pontos positivos e negativos extraídos de reviews.
 
-## Windows setup
+Toda a documentação explicativa está em pt-BR. Comandos, opções, prompts, mensagens
+do programa e exemplos de código usam en-US. Nomes técnicos e trechos originais do
+catálogo/reviews são preservados para manter a rastreabilidade dos experimentos.
 
-Run these PowerShell commands from the repository root. Python 3.12 and a current
-Node LTS release are recommended. Existing notebooks remain available.
+Consulte também [algoritmos e justificativas](algoritmos-busca.md) e
+[busca comparativa e benchmark](busca-e-benchmark.md).
+
+## Instalação no Windows
+
+Execute na raiz do repositório, com Python 3.12 e Node.js instalados:
 
 ```powershell
 py -3.12 -m venv .venv
@@ -16,52 +22,53 @@ py -3.12 -m venv .venv
 .venv/Scripts/python.exe manage.py migrate
 ```
 
-The download commands are setup steps only. The web application never downloads
-models or contacts Steam while serving requests. `requirements.txt` is sufficient
-for running and pins the official spaCy English model to 3.8.0 with its wheel checksum;
-`requirements-dev.txt` adds notebook-parity testing dependencies.
+`requirements.txt` contém as dependências de execução e fixa o modelo spaCy inglês
+3.8.0 com checksum; `requirements-dev.txt` acrescenta as dependências de testes.
+Downloads são etapas explícitas de instalação/preparação. Nenhum modelo é baixado
+durante requisições web. Os arquivos pickle devem ser exportações locais confiáveis
+porque sua desserialização executa código Python. Dados e artefatos são ignorados
+pelo Git; copie-os separadamente ao transferir a demonstração para outro computador.
 
-Use only trusted project pickle exports: pandas pickle loading executes Python
-serialization code. Dataset files and generated artifacts are intentionally ignored
-by Git and must be copied separately when moving the demo to another computer.
-
-## Prepare data (once)
+## Preparar uma instalação nova
 
 ```powershell
 .venv/Scripts/python.exe manage.py import_catalog
 .venv/Scripts/python.exe manage.py import_reviews
+.venv/Scripts/python.exe -u manage.py prepare_sentence_model
 .venv/Scripts/python.exe -u manage.py build_search
 .venv/Scripts/python.exe -u manage.py build_insights --resume
 ```
 
-Defaults read `_DadosLimpos/jogos_steam.pkl.gz` and `steam_reviews.pkl.gz`.
-Use `--catalog PATH` consistently for import_catalog/build_search and `--reviews PATH`
-for import_reviews to select other trusted exports. Preserve the same cleaned English
-schema. Search training uses vector_size=190, window=5, min_count=1, Skip-gram,
-seed=42, workers=1, epochs=10, exactly as the original notebook.
+Os arquivos padrão são `_DadosLimpos/jogos_steam.pkl.gz` e
+`_DadosLimpos/steam_reviews.pkl.gz`. Use `--catalog PATH` consistentemente em
+import_catalog/build_search e `--reviews PATH` em import_reviews para outros
+arquivos com o mesmo esquema de dados limpos em inglês.
 
-`import_catalog` replaces catalog data and clears reviews/insights; rerun all subsequent
-steps. `import_reviews` replaces reviews and invalidates insights; rerun build_insights.
-Imports publish in database transactions. Review IDs hash appid, timestamp, and text;
-exact repeated records are deduplicated. Counts refer to this collected English sample,
-which was originally sampled by the collection notebooks, not all Steam reviews.
+`import_catalog` substitui o catálogo e remove reviews/insights associados;
+execute as etapas seguintes novamente. `import_reviews` substitui as reviews e
+invalida seus insights. As importações são transacionais. Os IDs estáveis de review
+usam um hash de appid, timestamp e texto; registros exatamente repetidos são
+eliminados. As contagens descrevem apenas a amostra coletada em inglês.
 
-`build_insights --resume` skips games already prepared with the current analysis version.
-It processes every imported review and saves after each batch of 100 games. For a short demonstration,
-use `--appid 10 --appid 20` to prepare selected games first; the UI explicitly labels
-other games as pending. Run the unrestricted command to finish the full corpus.
-Do not run imports concurrently with preparation commands.
+**Para atualizar uma instalação já preparada**, não reimporte dados. Execute:
 
-Artifacts are published to a new version directory before atomically switching
-`artifacts/current`. SHA-256 file checksums, catalog fingerprint, preprocessing version,
-training settings, and ordered game IDs are validated on first load. Each backend
-process caches the active index; a new bundle or catalog fingerprint changes the cache key.
-Older bundle directories may be retained for diagnosis. Stop the backend before manually
-removing unused bundles on Windows, because vectors are memory mapped.
+```powershell
+.venv/Scripts/python.exe -u manage.py prepare_sentence_model
+.venv/Scripts/python.exe -u manage.py build_search --reuse-word2vec
+```
 
-## Run
+Isso preserva o Word2Vec treinado, as reviews e seus insights. O treinamento
+original usa 190 dimensões, janela 5, min_count 1, Skip-gram, semente 42, um worker
+e dez épocas. Os novos índices são construídos offline e publicados em bundle v2.
 
-Terminal 1, repository root:
+`build_insights --resume` ignora jogos já preparados com a versão atual da análise.
+Processa todas as reviews importadas e salva a cada lote de 100 jogos. Para preparar
+jogos específicos primeiro, use `--appid 10 --appid 20`; a interface identifica os
+demais como pendentes. Não execute importações ao mesmo tempo que a preparação.
+
+## Executar a demonstração
+
+Terminal 1, na raiz do repositório:
 
 ```powershell
 .venv/Scripts/python.exe manage.py runserver 127.0.0.1:8000 --noreload
@@ -75,74 +82,99 @@ npm ci
 npm run dev -- --port 5173 --strictPort
 ```
 
-Open http://127.0.0.1:5173. Vite proxies `/api` to Django on port 8000, so browser
-credentials and cross-origin configuration are unnecessary. Both services bind to
-localhost. These are local development servers; public deployment is outside v1.
-`npm run build` checks TypeScript and creates the production bundle;
-`npm run preview` previews that bundle with the same API proxy.
+Abra http://127.0.0.1:5173. O Vite encaminha `/api` para a porta 8000; não é preciso
+configurar CORS. Ambos os servidores aceitam conexões apenas em localhost.
+Mantenha os terminais abertos e use Ctrl+C para encerrá-los. Reinicie o backend
+após alterações no código, pois `--noreload` desativa a recarga automática.
 
-## Steam API key
+`npm run build` verifica TypeScript e gera o pacote de produção. `npm run preview`
+permite verificá-lo com o mesmo proxy. Os servidores utilizados aqui são locais;
+publicação pública não faz parte desta versão. O primeiro acesso a um método pode
+ser mais lento devido ao carregamento do índice/modelo.
 
-Browsing the prepared demo never requires a key. Offline collection operations that
-use authenticated Steam endpoints require the operator's own `STEAM_API_KEY`.
-Configure it in the process environment or copy `.env.example` to `.env` and fill
-it locally. Existing `1_Coleta_Dados/.env` configuration is also supported by the collector.
-Environment variables take precedence, then root `.env`, then the collection `.env`.
-Register a key at https://steamcommunity.com/dev/apikey. Never put it in `VITE_*`
-variables or browser storage. No key entry form or credential API exists.
+## Artefatos e cache
 
-The catalog collection notebook checks for the key before listing games. Its shared
-HTTP helper strips request URLs from raised network/HTTP errors, which could otherwise
-contain query-string credentials. Do not enable third-party HTTP debug logging when
-running authenticated collection. No network collection is part of web preparation.
+Cada preparação cria uma pasta nova antes de trocar atomicamente `artifacts/current`.
+O manifesto valida SHA-256 dos arquivos, fingerprint do catálogo, versões,
+configurações e IDs ordenados. O bundle v2 também registra a revisão MiniLM,
+truncamentos e custos de preparação. Bundles v1 continuam atendendo Word2Vec sem
+filtros; métodos novos e filtros exigem atualização.
 
-Before future collection runs, verify endpoints and access requirements against
-https://partner.steamgames.com/doc/webapi/IUserReviewsService and the relevant endpoint's
-documentation. A regular key does not guarantee access to publisher-only operations.
-The historical collection notebooks are preserved; this change does not migrate their
-review endpoints or claim those legacy endpoints still work.
+Cada processo do backend mantém seu índice em cache. Alterar o bundle ou fingerprint
+muda a chave desse cache. Índices BM25, vetores MiniLM e codificador são carregados
+sob demanda. Pastas anteriores podem ser mantidas para diagnóstico; no Windows,
+encerre o servidor antes de remover manualmente bundles não utilizados, pois há
+arquivos mapeados em memória. Para retomada e paralelismo de preparação, consulte
+[busca-e-benchmark.md](busca-e-benchmark.md).
 
-Optional backend variables: `DJANGO_SECRET_KEY`, `DISCOVERY_DATABASE`, and
-`DISCOVERY_ARTIFACTS`. The local-only fallback secret is not intended for hosting.
+## Chave da API Steam
 
-## API contract
+A navegação e a busca nos dados preparados não precisam de chave. Operações offline
+de coleta que usam endpoints autenticados exigem a chave do próprio operador em
+`STEAM_API_KEY`, configurada no ambiente ou em uma cópia local de `.env.example`
+chamada `.env`. A coleta também aceita `1_Coleta_Dados/.env`. A precedência é:
+variáveis do ambiente, `.env` da raiz e `.env` da coleta.
 
-All endpoints use JSON and are anonymous/read-only. Only GET is accepted.
+Registre a chave em https://steamcommunity.com/dev/apikey. Ela nunca deve entrar em
+variáveis `VITE_*`, armazenamento do navegador, respostas da API ou arquivos
+versionados. Não há formulário web para receber a chave. O coletor verifica sua
+presença antes de listar jogos, e o helper HTTP remove URLs de exceções que poderiam
+expor credenciais. Evite ativar logs de depuração HTTP ao fazer coleta autenticada.
 
-- `GET /api/v1/search/?q=...&limit=10`: `query`, `results`, `known_terms`,
-  `unknown_terms`, `message`. Each result contains `rank`, `similarity`, and the
-  game fields below. Query is trimmed, required, and limited to 500 characters;
-  limit is an integer from 1 to 50. An unknown-vocabulary query returns 200 with
-  no results and a helpful message. Similarity is cosine similarity, not a probability.
-- `GET /api/v1/games/{appid}/`: `appid`, `name`, `description`, `genres` and
-  `user_tags` (string arrays), `steam_url`, `review_count`, `recommended_count`.
-  These counts cover collected English reviews only. No price/image fields are invented.
-- `GET /api/v1/games/{appid}/insights/`: `appid`, `analysis_version`, `status`,
-  `collected_review_count`, `analyzed_review_count`, `positive`, `negative`, `note`.
-  Each point has `aspect`, `support_count`, and `evidence` containing `review_id`
-  and an original `excerpt`. Status is `ready`, `not_prepared`, `no_reviews`, or
-  `insufficient_evidence`. Missing insights return 200 with empty arrays.
-- `GET /api/v1/health/`: `database`, `catalog`, `reviews`, `search`,
-  `insights_prepared_games`, `detail`. Missing database tables return 503 with a
-  migration instruction; unready catalog/search returns 503. Review preparation
-  progress is informational and does not prevent searching.
+Antes de executar coletas futuras, confira os endpoints e requisitos atuais na
+[documentação Steam](https://partner.steamgames.com/doc/webapi/IUserReviewsService).
+Uma chave comum não garante acesso a operações exclusivas de publicadores. Os
+notebooks históricos foram preservados; esta atualização não migra seus endpoints
+de reviews nem afirma que endpoints antigos permanecem disponíveis.
 
-Invalid query inputs return 400 with field-to-error-array JSON. Unknown games return
-404 with `detail`. Unavailable/incompatible search artifacts return 503 with `detail`
-and preparation instructions. Response interfaces live in `frontend/src/api.ts`.
+As variáveis opcionais do backend são `DJANGO_SECRET_KEY`, `DISCOVERY_DATABASE` e
+`DISCOVERY_ARTIFACTS`. A chave Django de desenvolvimento é destinada apenas ao uso local.
 
-## Interpretation and quality checks
+## Contrato da API
 
-The extractor considers explicit aspect words, splits sentence/contrast/conjunction
-clauses, and parses relevant clauses only. It requires a nearby opinion in the
-dependency tree, abstains on unresolved multiple aspects, hypotheticals, comparisons, or competing sentiment,
-and uses VADER compound thresholds ±0.05. This prioritizes precision over coverage;
-sarcasm, implied aspects, and context across clauses remain limitations.
+Os endpoints são anônimos, de leitura, com respostas JSON. A busca comparativa e os
+parâmetros repetidos de filtro estão detalhados em [busca-e-benchmark.md](busca-e-benchmark.md).
 
-Each side shows at most five aspects, ranked by distinct supporting reviews, with
-at least two supporting reviews per aspect/polarity and up to three excerpts. One
-review may support both polarities, but repeated mentions do not inflate a count.
-Steam recommendation votes are stored separately from aspect sentiment.
+- `GET /api/v1/search/?q=...&limit=10`: retorna consulta, método, filtros normalizados,
+  resultados, diagnósticos Word2Vec e mensagem. A consulta é obrigatória, limitada a
+  500 caracteres; limit vai de 1 a 50. Cada resultado possui rank, score, score_type,
+  similarity e os campos do jogo. Similarity é cosseno apenas nos métodos semânticos;
+  nos métodos BM25/RRF vale null. Nenhum escore é probabilidade de recomendação.
+- `GET /api/v1/filters/`: rótulos e contagens de tags/gêneros disponíveis.
+- `GET /api/v1/games/{appid}/`: appid, name, description, genres, user_tags,
+  steam_url, review_count e recommended_count. As contagens são da amostra em inglês;
+  preços e imagens indisponíveis não são inventados.
+- `GET /api/v1/games/{appid}/insights/`: versão, status, contagens coletadas/analisadas,
+  positive, negative e note. Cada ponto contém aspect, summary, support_count e evidence com
+  review_id e excerpt. Os status são ready, not_prepared, no_reviews e
+  insufficient_evidence. Insights ausentes retornam 200 com arrays vazios.
+- `GET /api/v1/health/`: prontidão do banco, catálogo e busca, reviews importadas,
+  quantidade de jogos com insights e instruções em detail quando necessário.
+
+Entradas inválidas retornam 400; jogos inexistentes, 404; busca indisponível ou
+artefatos incompatíveis, 503. Consultas válidas sem correspondência retornam 200.
+No Word2Vec, nenhuma palavra conhecida produz resultado vazio; MiniLM pode retornar
+vizinhos mesmo para consultas ruins. Os tipos TypeScript ficam em `frontend/src/api.ts`.
+
+## Qualidade dos insights e verificações
+
+A extração utiliza aspectos explícitos, dependências spaCy e sentimento VADER por
+cláusula. Descarta comparações, hipóteses, múltiplos aspectos não resolvidos e
+sentimentos concorrentes. Os limiares são ±0,05. A prioridade é precisão sobre
+cobertura; sarcasmo e contexto além da cláusula permanecem limitações.
+
+Exibimos até cinco aspectos por lado, com duas reviews distintas de suporte no
+mínimo e até três trechos por ponto. Repetições não inflam a contagem. O voto de
+recomendação Steam permanece separado do sentimento do aspecto.
+
+A página apresenta listas de pontos positivos e negativos em frases curtas, em inglês.
+O campo `summary` é produzido por um modelo de frase determinístico: rótulo do aspecto
+e indicação de força ou desvantagem recorrente. Por exemplo, `Visual presentation is
+a recurring strength.` Os trechos originais ficam recolhidos em **View evidence**, com
+a contagem de suporte. Um mesmo aspecto pode aparecer nos dois lados.
+Esse resumo expressa somente o aspecto e a polaridade identificados, sem inferir detalhes
+como taxa de quadros, duração ou preço. Não constitui fato verificado sobre o jogo.
+Os dados existentes funcionam sem nova preparação, migração ou acesso à internet.
 
 ```powershell
 .venv/Scripts/python.exe manage.py test discovery_api
@@ -154,15 +186,11 @@ npm test
 npm run build
 ```
 
-For a reproducible manual quality review, `evaluate_insights --export PATH` samples
-50 candidate clauses (seed 42), ten from each of the first five games with enough
-aspect-bearing clauses. Fill each `expected` with `{aspect, polarity}` records or
-`[]` for ambiguous/neutral text, then run `evaluate_insights --annotations PATH`.
-This reports precision among emitted clause observations, coverage, recall, and
-false positives. It is a small development evaluation, not a Steam-wide accuracy claim.
-The acceptance target is at least 80% precision; tighten ambiguous extraction rules
-and rerun preparation if the target is missed.
+`evaluate_insights --export PATH` amostra 50 cláusulas, dez de cada um de cinco jogos,
+com semente 42. Preencha expected com pares aspect/polarity ou array vazio para
+abstenção e execute `evaluate_insights --annotations PATH`. A meta de desenvolvimento
+é 80% de precisão; o conjunto usado para ajustar regras não equivale a avaliação
+humana independente. Consulte os detalhes e limitações em `validation/README.md`.
 
-`audit_insights` verifies every saved excerpt belongs to its game and is a verbatim
-substring of the source review. It also checks full preparation coverage, point
-limits, and supporting counts; run it after full insight preparation finishes.
+`audit_insights` confere que cada trecho é literal e pertence ao jogo correto,
+além de verificar cobertura, limites e contagens. Execute após concluir a preparação.

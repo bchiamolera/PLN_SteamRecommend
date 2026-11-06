@@ -2,12 +2,15 @@ export interface Game {
   appid: number; name: string; description: string; genres: string[]; user_tags: string[];
   steam_url: string; review_count: number; recommended_count: number;
 }
-export interface SearchResult extends Game { rank: number; similarity: number }
+export type SearchMode = 'word2vec' | 'bm25' | 'sentence' | 'hybrid_word2vec' | 'hybrid_sentence';
+export interface Facets { tags: { label: string; count: number }[]; genres: { label: string; count: number }[] }
+export interface SearchResult extends Game { rank: number; similarity: number | null; score: number; score_type: 'cosine' | 'bm25' | 'rrf' }
 export interface SearchResponse {
   query: string; results: SearchResult[]; known_terms: string[]; unknown_terms: string[]; message: string;
+  mode: SearchMode; filters: { required_tag: string[]; excluded_tag: string[]; genre: string[] };
 }
 export interface Evidence { review_id: string; excerpt: string }
-export interface Aspect { aspect: string; support_count: number; evidence: Evidence[] }
+export interface Aspect { aspect: string; summary: string; support_count: number; evidence: Evidence[] }
 export interface Insights {
   appid: number; analysis_version: string;
   status: 'ready' | 'not_prepared' | 'no_reviews' | 'insufficient_evidence';

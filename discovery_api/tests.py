@@ -11,7 +11,7 @@ from django.test import TestCase, override_settings
 from rest_framework.test import APIClient
 from steam_discovery.artifacts import ArtifactError, SearchIndex, save_bundle
 from steam_discovery.credentials import steam_api_key
-from steam_discovery.insights import AspectAnalyzer, VERSION, aggregate
+from steam_discovery.insights import ASPECTS, AspectAnalyzer, VERSION, aggregate, summarize_points
 from steam_discovery.preprocessing import preprocess, normalizar
 from steam_discovery.search import rank, train_word2vec, document_vector
 from .models import DatasetState, Game, GameInsight, Review
@@ -58,6 +58,21 @@ class InsightTests(UnitTestCase):
     def setUpClass(cls):
         cls.analyzer = AspectAnalyzer()
 
+    def test_summaries_preserve_support_evidence_and_conflicting_polarities(self):
+        for aspect in ASPECTS:
+            with self.subTest(aspect=aspect):
+                point = {'aspect': aspect, 'support_count': 2, 'evidence': [
+                    {'review_id': 'a', 'excerpt': 'Original evidence.'},
+                ]}
+                positive = summarize_points([point], 'positive')[0]
+                negative = summarize_points([point], 'negative')[0]
+                self.assertIn('recurring strength', positive['summary'])
+                self.assertIn('recurring drawback', negative['summary'])
+                self.assertEqual(positive['evidence'], point['evidence'])
+                self.assertEqual(negative['support_count'], 2)
+                self.assertNotIn('summary', point)
+        self.assertEqual(summarize_points([], 'positive'), [])
+
     def test_negation_and_mixed_aspects(self):
         points = self.analyzer.analyze('The graphics are beautiful but the controls are terrible. The story is not good.')
         self.assertIn(('graphics', 'positive'), [(p['aspect'], p['polarity']) for p in points])
@@ -103,7 +118,7 @@ class ApiTests(TestCase):
 
     def test_offline_search_and_details_without_credentials(self):
         from types import SimpleNamespace
-        index = SimpleNamespace(search=lambda q, k: ([(10, .8)], ['world'], []))
+        index = SimpleNamespace(retrieve=lambda q, k, mode, filters: {'matches': [(10, .8)], 'known_terms': ['world'], 'unknown_terms': [], 'score_type': 'cosine', 'filters': filters, 'message': ''})
         with patch.dict(os.environ, {'STEAM_API_KEY': ''}), patch('socket.socket.connect', side_effect=AssertionError('Network forbidden')), patch('discovery_api.views.search_index', return_value=index):
             response = self.client.get('/api/v1/search/', {'q': 'world'})
             self.assertEqual(response.status_code, 200)
@@ -122,6 +137,8 @@ class ApiTests(TestCase):
         GameInsight.objects.create(game=self.game, analysis_version=VERSION, analyzed_count=2, **points)
         response = self.client.get(endpoint).json()
         self.assertEqual(response['status'], 'ready')
+        self.assertEqual(response['positive'][0]['summary'], 'Visual presentation is a recurring strength.')
+        self.assertNotIn('summary', GameInsight.objects.get(game=self.game).positive[0])
         for e in response['positive'][0]['evidence']:
             review = Review.objects.get(pk=e['review_id'])
             self.assertEqual(review.game_id, 10)

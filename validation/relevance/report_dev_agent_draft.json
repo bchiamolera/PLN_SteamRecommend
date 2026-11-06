@@ -1,0 +1,99 @@
+{
+  "split": "dev",
+  "label_source": "agent_draft",
+  "exploratory": true,
+  "quality_improvement_claimed": false,
+  "judgment_coverage": 0.3576526566217288,
+  "fully_judged_queries": [
+    "q001",
+    "q002",
+    "q022",
+    "q023",
+    "q025",
+    "q026",
+    "q028",
+    "q029",
+    "q032",
+    "q056"
+  ],
+  "incomplete_queries": [
+    "q004",
+    "q005",
+    "q007",
+    "q008",
+    "q010",
+    "q011",
+    "q013",
+    "q014",
+    "q016",
+    "q017",
+    "q019",
+    "q020",
+    "q031",
+    "q034",
+    "q035",
+    "q037",
+    "q038",
+    "q040",
+    "q041",
+    "q043",
+    "q044",
+    "q046",
+    "q047",
+    "q049",
+    "q050",
+    "q052",
+    "q053",
+    "q055",
+    "q058",
+    "q059"
+  ],
+  "no_relevant_judgments": [
+    "q056"
+  ],
+  "evaluated_categories": {
+    "descriptive": 2,
+    "exact_title": 6,
+    "mechanics": 1,
+    "hard": 1
+  },
+  "methods": {
+    "word2vec": {
+      "precision_at_5": 0.3111111111111111,
+      "ndcg_at_10": 0.3193242150870669,
+      "no_match_returned_games": 0,
+      "warm_p95_seconds": 0.09505230000650045,
+      "constraint_violations": 0
+    },
+    "bm25": {
+      "precision_at_5": 0.6,
+      "ndcg_at_10": 0.7907320010864921,
+      "no_match_returned_games": 0,
+      "warm_p95_seconds": 0.032586999994236976,
+      "constraint_violations": 0
+    },
+    "sentence": {
+      "precision_at_5": 0.4222222222222222,
+      "ndcg_at_10": 0.4220056122881737,
+      "no_match_returned_games": 10,
+      "warm_p95_seconds": 0.13951280000037514,
+      "constraint_violations": 0
+    },
+    "hybrid_word2vec": {
+      "precision_at_5": 0.37777777777777777,
+      "ndcg_at_10": 0.46027150605530387,
+      "no_match_returned_games": 0,
+      "warm_p95_seconds": 0.09053479999420233,
+      "constraint_violations": 0
+    },
+    "hybrid_sentence": {
+      "precision_at_5": 0.4888888888888889,
+      "ndcg_at_10": 0.6468184656132072,
+      "no_match_returned_games": 10,
+      "warm_p95_seconds": 0.13518660000409,
+      "constraint_violations": 0
+    }
+  },
+  "note": "Comparable metrics use the same fully judged query subset. IDCG=0 is excluded from relevance averages. Recall is not estimated from pooled judgments.",
+  "runtime_rss_mb": 1525.2
+}

@@ -1,0 +1,26 @@
+{
+  "catalog_fingerprint": "92884668028eeeadb1998524bd07d74cf871b13fd40ce9f020c27f4a2cb7e7c4",
+  "bundle": "911744f37cfd4831b537ec048eb95cff",
+  "bm25": {
+    "k1": 1.5,
+    "b": 0.75,
+    "fields": [
+      "name",
+      "genres",
+      "user_tags",
+      "description"
+    ],
+    "version": 1
+  },
+  "sentence": {
+    "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+    "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "max_tokens": 256,
+    "dimensions": 384,
+    "truncated_descriptions": 0
+  },
+  "rrf_k": 60,
+  "candidates": 200,
+  "retrieval_code_sha256": "ed6d9ff91567c76b3d1433f34bd8268c0ef667c0738550b780c5797041a43ab5",
+  "queries_sha256": "f427742c4facedb4b1dede760cfeb15d435311c0a6e248bd7954c4a15b83ebda"
+}

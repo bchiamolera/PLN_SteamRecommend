@@ -1,6 +1,17 @@
 # PLN Steam Recommend
 
+A documentação usa pt-BR. Código, comandos e prompts usam en-US; identificadores
+legados e campos dos dados são preservados quando necessários à compatibilidade
+com notebooks e exportações existentes. Trechos de reviews/consultas mantêm o
+idioma original para não alterar as evidências dos experimentos.
+
 ## Demo web: Django + React
+
+Agora também há comparação entre Word2Vec, BM25, MiniLM e buscas híbridas por RRF,
+com filtros obrigatórios de tags/gêneros e benchmark com julgamentos rastreáveis.
+Consulte [como atualizar e avaliar](docs/busca-e-benchmark.md) e a
+[explicação dos algoritmos, escolhas e etapas de execução](docs/algoritmos-busca.md).
+Os métodos novos são experimentais; Word2Vec continua sendo a referência padrão.
 
 O projeto inclui uma API Django REST e uma interface React/TypeScript para busca
 Word2Vec, detalhes dos jogos e pontos positivos/negativos com evidências das reviews.

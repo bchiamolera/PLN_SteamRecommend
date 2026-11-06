@@ -1,9 +1,14 @@
 from rest_framework import serializers
 from .models import Game
+from steam_discovery.retrieval import MODES
 
 class SearchQuerySerializer(serializers.Serializer):
     q = serializers.CharField(max_length=500, allow_blank=False, trim_whitespace=True)
     limit = serializers.IntegerField(default=10, min_value=1, max_value=50)
+    mode = serializers.ChoiceField(choices=MODES, default='word2vec')
+    required_tag = serializers.ListField(child=serializers.CharField(max_length=100), required=False, default=list, max_length=30)
+    excluded_tag = serializers.ListField(child=serializers.CharField(max_length=100), required=False, default=list, max_length=30)
+    genre = serializers.ListField(child=serializers.CharField(max_length=100), required=False, default=list, max_length=30)
 
 class GameSerializer(serializers.ModelSerializer):
     steam_url = serializers.ReadOnlyField()
@@ -18,6 +23,7 @@ class EvidenceSerializer(serializers.Serializer):
 
 class AspectSerializer(serializers.Serializer):
     aspect = serializers.CharField()
+    summary = serializers.CharField()
     support_count = serializers.IntegerField()
     evidence = EvidenceSerializer(many=True)
 
