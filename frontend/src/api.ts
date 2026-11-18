@@ -18,12 +18,54 @@ export interface Insights {
   positive: Aspect[]; negative: Aspect[]; note: string;
 }
 
+export interface AgentFilters { required_tag: string[]; excluded_tag: string[]; genre: string[] }
+export interface AgentContext { preferences: string[]; latest_query: string; previous_appids: number[] }
+export interface AgentReference { kind: 'catalog' | 'review'; field: string; review_id: string; excerpt: string }
+export interface AgentResult extends SearchResult { explanation: string; references: AgentReference[]; insight_status: string }
+export interface AgentResponse {
+  request_id?: string;
+  status: 'ready' | 'needs_clarification' | 'no_matches'; query: string; message: string;
+  mode: SearchMode | null; results: AgentResult[]; filters: AgentFilters; preferences: string[];
+  context: AgentContext; limitations: string[]; actions: string[]; elapsed_ms: number;
+  provider: string; model: string; usage: Record<string, number>;
+}
+
+export type ChatGame = Omit<AgentResult, 'rank' | 'score' | 'score_type' | 'similarity'> &
+  Partial<Pick<AgentResult, 'rank' | 'score' | 'score_type' | 'similarity'>>;
+export interface ChatResponse extends Omit<AgentResponse, 'status' | 'results'> {
+  status: AgentResponse['status'] | 'answer';
+  kind: 'recommendations' | 'answer' | 'needs_clarification' | 'no_matches';
+  reply: string;
+  results: ChatGame[];
+}
+export interface ChatTurn { message: string; response: ChatResponse }
+
+export class AgentRequestError extends Error {
+  constructor(message: string, public code: string, public requestId?: string) { super(message); }
+}
+
+export async function agentPost<T>(path: string, body: unknown, key: string, signal: AbortSignal): Promise<T> {
+  let response: Response;
+  try {
+    response = await fetch(`/api/v1/agent/${path}/`, { method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Agent-API-Key': key },
+      body: JSON.stringify(body), signal, cache: 'no-store' });
+  } catch (error) {
+    if (error instanceof Error && error.name === 'AbortError') throw error;
+    throw new Error('Cannot reach the backend. No automatic retry was made.');
+  }
+  let data;
+  try { data = await response.json(); } catch { throw new Error('The backend returned an invalid response.'); }
+  if (!response.ok) throw new AgentRequestError(data.detail || 'Agent request failed.', data.code || 'unknown', data.request_id);
+  return data as T;
+}
+
 export async function get<T>(path: string, signal?: AbortSignal): Promise<T> {
   let response: Response;
   try { response = await fetch(`/api/v1/${path}`, { signal }); }
   catch (error) {
     if (error instanceof Error && error.name === 'AbortError') throw error;
-    throw new Error('Cannot reach the backend. Start Django on localhost:8000 and try again.');
+    throw new Error('Cannot reach the backend. Start Django at the configured backend address and try again.');
   }
   let data;
   try { data = await response.json(); }

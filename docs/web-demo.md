@@ -132,7 +132,10 @@ As variáveis opcionais do backend são `DJANGO_SECRET_KEY`, `DISCOVERY_DATABASE
 
 ## Contrato da API
 
-Os endpoints são anônimos, de leitura, com respostas JSON. A busca comparativa e os
+Os endpoints convencionais abaixo são anônimos, de leitura, com respostas JSON.
+O modo agente opcional usa endpoints POST separados, chave fornecida pelo usuário
+e chamadas pagas a provedores externos; consulte [agente-descoberta.md](agente-descoberta.md).
+A busca comparativa e os
 parâmetros repetidos de filtro estão detalhados em [busca-e-benchmark.md](busca-e-benchmark.md).
 
 - `GET /api/v1/search/?q=...&limit=10`: retorna consulta, método, filtros normalizados,

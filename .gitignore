@@ -227,6 +227,8 @@ __marimo__/
 # Local web demo data, models, and frontend build output
 artifacts/
 frontend/node_modules/
+frontend/.env.local
 frontend/dist/
 frontend/*.tsbuildinfo
 validation/local_*.json
+validation/local_browser/

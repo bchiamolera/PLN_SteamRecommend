@@ -7,6 +7,17 @@ idioma original para não alterar as evidências dos experimentos.
 
 ## Demo web: Django + React
 
+O modo agente opcional adiciona descoberta e refinamentos com chave fornecida pelo
+usuário para OpenAI, Anthropic ou Google, sem alterar a busca convencional.
+Consulte [uso, limites e avaliação do agente](docs/agente-descoberta.md).
+
+A página **Chat** permite conversar com o agente, refinar recomendações, perguntar
+sobre jogos sugeridos e compará-los com evidências do catálogo e das reviews.
+O histórico fica somente na memória da aba e é apagado ao recarregar. As chamadas
+têm limite padrão de 45 segundos por tentativa e 180 segundos por requisição,
+com até cinco retentativas para falhas temporárias dentro desse prazo.
+Consulte também a [avaliação reproduzível do chat](docs/agente-descoberta.md#avaliação-reproduzível-do-chat).
+
 Agora também há comparação entre Word2Vec, BM25, MiniLM e buscas híbridas por RRF,
 com filtros obrigatórios de tags/gêneros e benchmark com julgamentos rastreáveis.
 Consulte [como atualizar e avaliar](docs/busca-e-benchmark.md) e a
@@ -20,6 +31,77 @@ O demo usa os dados locais sem chave Steam; coleta autenticada requer `STEAM_API
 configurada apenas no ambiente do backend ou em `.env`.
 
 Projeto de Processamento de Linguagem Natural aplicado ao catálogo e às avaliações de jogos da Steam. O objetivo é explorar descrições e opiniões de usuários para agrupar jogos, recuperar títulos relevantes, prever recomendações e extrair informação linguística.
+
+## Como iniciar a aplicação
+
+Os comandos abaixo usam PowerShell no Windows e devem ser executados na raiz do
+repositório. É necessário ter Python 3.12 e Node.js com npm instalados.
+
+### Instalação inicial
+
+Crie o ambiente virtual, instale as dependências e prepare o banco de dados:
+
+```powershell
+py -3.12 -m venv .venv
+.venv/Scripts/python.exe -m pip install -r requirements-dev.txt
+.venv/Scripts/python.exe -m nltk.downloader stopwords
+.venv/Scripts/python.exe manage.py migrate
+npm --prefix frontend ci
+```
+
+Se o ambiente virtual já existir, pule a criação da pasta `.venv`. Não é necessário
+ativá-lo: os comandos usam diretamente seu executável Python.
+
+A busca também exige o catálogo importado e os índices locais preparados. Em uma
+instalação nova, siga a seção [Preparar uma instalação nova](docs/web-demo.md#preparar-uma-instalação-nova)
+antes de iniciar os servidores. Dados e artefatos não são incluídos no Git.
+Se a instalação já estiver preparada, não é necessário reimportar os dados.
+
+### Iniciar backend e frontend
+
+Abra dois terminais na raiz do repositório e mantenha ambos em execução.
+
+**Terminal 1 — backend Django:**
+
+```powershell
+.venv/Scripts/python.exe manage.py runserver 127.0.0.1:8000 --noreload
+```
+
+**Terminal 2 — frontend React:**
+
+```powershell
+npm --prefix frontend run dev -- --port 5173 --strictPort
+```
+
+Abra [a aplicação no navegador](http://127.0.0.1:5173). O frontend encaminha as
+requisições da API para o backend na porta 8000. Nas próximas execuções, basta
+iniciar esses dois servidores. Para encerrar, pressione `Ctrl+C` em cada terminal.
+Após alterar código Python, reinicie o backend, pois `--noreload` desativa a
+recarga automática.
+
+### Se a conexão com o backend falhar
+
+Se a porta 8000 estiver inacessível, inicie Django em outra porta:
+
+```powershell
+.venv/Scripts/python.exe manage.py runserver 127.0.0.1:8001 --noreload
+```
+
+Crie `frontend/.env.local` com `STEAM_ATLAS_API_TARGET=http://127.0.0.1:8001`
+e reinicie o frontend. Essa configuração local também é usada pelo preview.
+O padrão continua sendo a porta 8000 quando não há configuração.
+
+### Usar o chatbot
+
+Abra [Chat](http://127.0.0.1:5173/chat), escolha o provedor, informe sua chave de
+API, clique em **Load models** e selecione um modelo. Escreva sua mensagem em inglês
+e clique em **Send message**. Por exemplo: `Recommend a cozy game with exploration.`
+
+As chamadas do chatbot podem gerar cobrança no provedor. A chave fica somente na
+memória da aba e deve ser informada novamente após recarregar a página. A busca
+convencional usa os dados locais sem chave; a chave Steam não é necessária para
+iniciar a aplicação. Consulte [uso e limites do agente](docs/agente-descoberta.md)
+para mais detalhes.
 
 ## Dicionário dos dados
 
