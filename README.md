@@ -1,5 +1,38 @@
 # PLN Steam Recommend
 
+## Ficha de apresentação do trabalho
+
+### 1. Título do trabalho
+
+PLN Steam Recommend: busca e recomendação de jogos com processamento de linguagem natural
+
+### 2. Integrantes da equipe
+
+- Bernardo Chiamolera
+- Thierry Zancanaro
+- Vinícius Estrázulas Mattos
+- Matheus Gamba de Oliveira
+
+### 3. Resumo
+
+O trabalho explora descrições, gêneros, tags e avaliações de usuários da Steam para apoiar a descoberta de jogos no aplicativo Steam Atlas. A base local preparada para a demonstração reúne 179.464 jogos e 395.256 avaliações em inglês, vinculados pelo identificador appid. Os procedimentos incluem coleta, limpeza e preparação textual, representações BoW e TF-IDF, agrupamento com K-Means, busca por Word2Vec e BERT, classificação de recomendação e análises de sentimentos, entidades e relações. A aplicação web acrescenta BM25, MiniLM, fusão de rankings por RRF e um agente conversacional opcional com evidências do catálogo e das avaliações. Nos experimentos documentados, TF-IDF com K-Means produziu dez grupos temáticos interpretáveis; o classificador TF-IDF com Regressão Logística obteve acurácia e F1 macro de 0,873 e ROC-AUC de 0,944 em 20.000 avaliações de teste. Word2Vec apresentou resultados qualitativamente mais consistentes que BERT na consulta analisada. Esses achados são restritos aos experimentos realizados; a qualidade geral das recomendações e das explicações ainda requer avaliação humana independente.
+
+### 4. Palavras-chave
+
+Processamento de linguagem natural; Recomendação de jogos; Steam.
+
+### 5. Miniatura do aplicativo
+
+<img src="validation/relevance/demo-blue.jpg" alt="Tela inicial do Steam Atlas com campo de busca de jogos em linguagem natural" width="480">
+
+*Captura da tela inicial do Steam Atlas, disponível nos registros de validação do projeto.*
+
+### 6. Chave de API para LLM
+
+Busca convencional e análise local: não exigem chave de API de LLM. Chat e modo agente: o usuário deve informar sua própria chave de um dos fornecedores suportados: OpenAI, Anthropic ou Google. A chave permanece na memória da aba e precisa ser informada novamente após recarregar a página; o uso pode gerar cobrança pelo fornecedor. A chave da Steam é separada, necessária apenas para a coleta autenticada, não para executar a demonstração com os dados locais.
+
+[Baixar a ficha de apresentação em PDF](output/pdf/apresentacao_pln_steam_recommend.pdf).
+
 A documentação usa pt-BR. Código, comandos e prompts usam en-US; identificadores
 legados e campos dos dados são preservados quando necessários à compatibilidade
 com notebooks e exportações existentes. Trechos de reviews/consultas mantêm o
