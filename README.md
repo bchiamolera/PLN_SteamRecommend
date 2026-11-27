@@ -152,6 +152,19 @@ para mais detalhes.
 
 ### Classe `Review`
 
+
+## Baixar os dados
+
+Baixe [steam-clean.zip](https://github.com/bchiamolera/PLN_SteamRecommend/releases/download/dataset-v1/steam-clean.zip) para usar os jogos e avaliações preparados, incluindo as variantes com lematização e stemming. Para reproduzir a limpeza, baixe também [steam-raw.zip](https://github.com/bchiamolera/PLN_SteamRecommend/releases/download/dataset-v1/steam-raw.zip).
+
+Em um clone novo, abra o PowerShell na raiz do repositório. Se os arquivos estiverem em `Downloads`, execute a primeira linha para os dados preparados e a segunda apenas se baixou os dados brutos.
+
+```powershell
+tar -xf "$HOME/Downloads/steam-clean.zip"
+tar -xf "$HOME/Downloads/steam-raw.zip"
+```
+
+A extração cria `_DadosLimpos/` e `_DadosBrutos/`, respectivamente. Mantenha os arquivos `.pkl.gz` compactados. Para importar o catálogo e preparar os índices da aplicação, siga o [guia de instalação](docs/web-demo.md#preparar-uma-instalação-nova).
 | Campo | Descrição | Tipo |
 |---|---|---|
 | `appid` | ID único do jogo | `int` |
